@@ -18,7 +18,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo "Budowanie"
-                sh 'docker build -t nazwa_obrazu'
+                sh 'docker build -t nazwa_obrazu .'
             }
         }
         stage('Deploy'){
