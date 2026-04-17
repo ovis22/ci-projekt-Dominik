@@ -9,34 +9,32 @@ pipeline {
 
             }
         }
-    }
-    stage('Testy'){
-        steps{
-            echo "Uruchomienie testów"
-            sh 'python3 test_app.py'
+        stage('Testy'){
+            steps{
+                echo "Uruchomienie testów"
+                sh 'python3 test_app.py'
+            }
+        }
+        stage('Build'){
+            steps{
+                echo "Budowanie"
+                sh 'docker build -t nazwa_obrazu'
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo "Deployowanie"
+                sh 'docker stop nazwa_obrazu'
+                sh 'docker run -d -p 5000:5000 nazwa_obrazu'
+            }
         }
     }
-    stage('Build'){
-        steps{
-            echo "Budowanie"
-            sh 'docker build -t nazwa_obrazu'
+    post {
+        success {
+            echo "OK"
+        }
+        failure {
+            echo "BLAD! Sprawdź logi!"
         }
     }
-    stage('Deploy'){
-        steps{
-            echo "Deployowanie"
-            sh 'docker stop nazwa_obrazu'
-            sh 'docker run -d -p 5000:5000 nazwa_obrazu'
-        }
-    }
-
-  post {
-    success {
-        echo "OK"
-    }
-    failure {
-        echo "BLAD! Sprawdź logi!"
-    }
-  }
-
 }
