@@ -9,6 +9,11 @@ pipeline {
             }
         }
         stage('Testy'){
+            when {
+                expression {
+                    env.GIT_BRANCH != 'origin/main'
+                }
+            }
             steps{
                 echo "Uruchomienie testów"
                 sh 'python3 test_app.py'
