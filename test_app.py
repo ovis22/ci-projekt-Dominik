@@ -27,3 +27,5 @@ if __name__ == "__main__":
     test_odwroc()
     print("Wszystkie testy OK")
 
+
+
