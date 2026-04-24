@@ -6,7 +6,6 @@ pipeline {
             steps {
                 echo "Gałąź: ${env.GIT_BRANCH}"
                 echo "Build: ${env.BUILD_NUMBER}"
-
             }
         }
         stage('Testy'){
@@ -23,9 +22,8 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                echo "Deployowanie"
-                sh 'docker stop moj_kontener || true'                
-                sh 'docker rm moj_kontener || true'
+                echo "Deployowanie"               
+                sh 'docker rm -f moj_kontener || true'
                 sh 'docker run -d -p 5000:5000 --name moj_kontener nazwa_obrazu'
             }
         }
