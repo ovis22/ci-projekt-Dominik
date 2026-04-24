@@ -24,7 +24,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 echo "Deployowanie"
-                sh 'docker stop moj_kontener'
+                sh 'docker stop moj_kontener || true'
                 sh 'docker run -d -p 5000:5000 --name moj_kontener nazwa_obrazu'
             }
         }
